@@ -5,12 +5,15 @@ import { TeamService } from '../services/team.service';
 import { IPlayer, IPlayerSelection } from 'src/app/shared/interfaces/player.interface';
 import { ICoachDetails } from 'src/app/shared/interfaces/coach.interface';
 import { ISession } from 'src/app/shared/interfaces/session.interface';
+import { Loader } from 'src/app/shared/utils/loader';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-order-select',
   templateUrl: './order-select.component.html',
   styleUrls: ['./order-select.component.scss'],
 })
+@Loader({ loadingProperty: 'loader' })
 export class OrderSelectComponent implements OnInit {
   userDetails: ICoachDetails;
   teams: ITeam[];
@@ -19,8 +22,8 @@ export class OrderSelectComponent implements OnInit {
   selectedPlayerList: IPlayerSelection[] = [];
   selectedTeamId: string;
   lastSelectedIndex: number = 0;
-
-  constructor(private route: ActivatedRoute, private teamService: TeamService, private router: Router) { }
+  loader: any;
+  constructor(private route: ActivatedRoute, private teamService: TeamService, private router: Router, private loadingController: LoadingController) { }
 
   ngOnInit() {
     console.log(this.route.snapshot.parent.data.teams);
@@ -30,6 +33,7 @@ export class OrderSelectComponent implements OnInit {
   }
 
   getPlayerList(event) {
+    this.loader.present();
     this.selectedTeamId = event.target.value;
     this.teamService.getPlayers(this.selectedTeamId).then((data) => {
       console.log(data);
@@ -40,6 +44,8 @@ export class OrderSelectComponent implements OnInit {
       this.playerList = [...data];
     }).catch((err) => {
       console.log(err);
+    }).finally(() => {
+      this.loader.dismiss();
     });
   }
 
@@ -86,12 +92,15 @@ export class OrderSelectComponent implements OnInit {
       const { selected, ...playerWithoutSelection} = player;
       return playerWithoutSelection;
     });
+    this.loader.present();
     this.teamService.addSessionData(intialSession, selectedPlayerListWithoutSelection).then((data) => {
       if(data) {
         this.router.navigate(['../main-session/' + data.sessionId], { relativeTo: this.route });
       }
     }).catch((err) => {
       console.log(err);
+    }).finally(() => {
+      this.loader.dismiss();
     })
   }
 

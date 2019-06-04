@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { ITeam } from 'src/app/shared/interfaces/teams.interface';
 import { v4 as uuid } from 'uuid';
-import { LoaderService } from 'src/app/shared/services/loader.service';
 import { first } from 'rxjs/operators';
 import { IPlayer } from 'src/app/shared/interfaces/player.interface';
 import { ISession, IAddSessionResponse, ISessionAction } from 'src/app/shared/interfaces/session.interface';
@@ -15,7 +14,8 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class TeamService {
     selectedPlayersList: IPlayer[];
-    constructor(private af: AngularFirestore, private loaderService: LoaderService) { }
+    loader: any;
+    constructor(private af: AngularFirestore) { }
 
     async createTeam(teamDetails: ITeam): Promise<any> {
         const teamId = uuid();
@@ -48,7 +48,7 @@ export class TeamService {
                 resolve(data);
             }).catch((err) => {
                 reject(err);
-            });
+            })
         });
     }
 
@@ -79,7 +79,7 @@ export class TeamService {
                     reject({
                         action: 'failure'
                     });
-                });
+                })
             });
         });
     }

@@ -1,4 +1,4 @@
-const isFunction = fn => typeof fn === 'function';
+export const isFunction = fn => typeof fn === 'function';
 const doUnsubscribe = subscription => {
   subscription &&
     isFunction(subscription.unsubscribe) &&

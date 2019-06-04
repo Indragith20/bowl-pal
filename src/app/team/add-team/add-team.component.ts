@@ -4,18 +4,22 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ICoachDetails, IManageTeamDetails } from 'src/app/shared/interfaces/coach.interface';
 import { TeamService } from '../services/team.service';
 import { ToasterService } from 'src/app/shared/services/toaster.service';
+import { Loader } from 'src/app/shared/utils/loader';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-team',
   templateUrl: './add-team.component.html',
   styleUrls: ['./add-team.component.scss'],
 })
+@Loader({ loadingProperty: 'loader'})
 export class AddTeamComponent implements OnInit {
   userData: ICoachDetails;
   teamForm: FormGroup;
+  loader: any;
 
   constructor(private fb: FormBuilder, private router: Router,
-     private route: ActivatedRoute, private teamService: TeamService, private toaster: ToasterService) { }
+     private route: ActivatedRoute, private teamService: TeamService, private toaster: ToasterService, private loadingController: LoadingController) { }
 
   ngOnInit() {
     const teamDetails: IManageTeamDetails = this.route.snapshot.parent.data.teams;
@@ -30,12 +34,15 @@ export class AddTeamComponent implements OnInit {
   }
 
   addNewTeam() {
+    this.loader.present();
     this.teamService.createTeam(this.teamForm.value).then((data) => {
       if(data) {
         this.toaster.presentToast('Team Added Successfully');
       }
     }).catch((err) => {
       this.toaster.presentToast('Something Bad Happened');
+    }).finally(() => {
+      this.loader.dismiss();
     })
   }
 

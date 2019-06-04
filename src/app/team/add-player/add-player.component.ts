@@ -6,21 +6,25 @@ import { TeamService } from '../services/team.service';
 import { Subscription } from 'rxjs';
 import { AutoUnsubscribe } from 'src/app/shared/utils/autounsubscribe';
 import { ToasterService } from 'src/app/shared/services/toaster.service';
+import { Loader } from 'src/app/shared/utils/loader';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-player',
   templateUrl: './add-player.component.html',
   styleUrls: ['./add-player.component.scss'],
 })
+@Loader({ loadingProperty: 'loader'})
 @AutoUnsubscribe()
 export class AddPlayerComponent implements OnInit, OnDestroy {
   userData: ICoachDetails;
   playerForm: FormGroup;
   selectedTeamId: string;
   teamSubscription: Subscription;
+  loader: any;
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder,
-     private teamService: TeamService, private router: Router, private toast: ToasterService) { }
+     private teamService: TeamService, private router: Router, private toast: ToasterService, private loadingController: LoadingController) { }
 
   ngOnInit() {
     const teamDetails: IManageTeamDetails = this.route.snapshot.parent.data.teams;
@@ -55,6 +59,7 @@ export class AddPlayerComponent implements OnInit, OnDestroy {
 
   addNewPlayer() {
     console.log(this.playerForm.value);
+    this.loader.present();
     this.teamService.addPlayer(this.playerForm.value).then((data) => {
       console.log(data);
       if(data && data.path) {
@@ -66,6 +71,8 @@ export class AddPlayerComponent implements OnInit, OnDestroy {
     }).catch((err) => {
       console.log(err);
       this.toast.presentToast('Something Bad Happened');
+    }).finally(() => {
+      this.loader.dismiss();
     });
   }
 

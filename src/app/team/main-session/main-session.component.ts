@@ -3,12 +3,15 @@ import { IPlayer } from 'src/app/shared/interfaces/player.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeamService } from '../services/team.service';
 import { ISessionAction } from 'src/app/shared/interfaces/session.interface';
+import { Loader } from 'src/app/shared/utils/loader';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-main-session',
   templateUrl: './main-session.component.html',
   styleUrls: ['./main-session.component.scss'],
 })
+@Loader({ loadingProperty: 'loader'})
 export class MainSessionComponent implements OnInit {
   sessionId: string;
   playersList: IPlayer[];
@@ -24,8 +27,8 @@ export class MainSessionComponent implements OnInit {
   selectedBallLength: string;
   disableButton: boolean = true;
   startIndex: number = 0;
-
-  constructor(private route: ActivatedRoute, private router: Router, private teamService: TeamService) { }
+  loader: any;
+  constructor(private route: ActivatedRoute, private router: Router, private teamService: TeamService, private loadingController: LoadingController) { }
 
   ngOnInit() {
     const routeData = this.route.snapshot.data.sessionDetails;
@@ -97,6 +100,7 @@ export class MainSessionComponent implements OnInit {
   }
 
   recordAction() {
+    this.loader.present();
     const action: ISessionAction = {
       actionType: this.selectedBallLength,
       batsmenType: this.selectedBatsmenType ? this.selectedBatsmenType : '',
@@ -109,6 +113,8 @@ export class MainSessionComponent implements OnInit {
       this.movePlayer();
     }).catch((err) => {
       console.log(err);
+    }).finally(() => {
+      this.loader.dismiss();
     });
   }
 
