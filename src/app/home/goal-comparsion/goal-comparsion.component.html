@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Goal Progress</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ng-container class="full-container">
+<ng-container class="top-container">
+  <ion-segment (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="days" mode="ios">
+      <ion-label>Days</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="months" mode="ios">
+      <ion-label>Months</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="years" mode="ios">
+      <ion-label>Years</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ng-container class="container">
+    <ng-container>
+      <canvas #barchart id="canvas"></canvas>
+    </ng-container>
+  </ng-container>
+
+  <ng-container class="main-detail-container">
+    <ion-list>
+      <ion-item color="primary">
+        <ion-label>This week</ion-label>
+        <ion-label>No of Deliveries</ion-label>
+      </ion-item>
+      <ion-item *ngFor="let week of weeks">
+        <ion-label>{{week}}</ion-label>
+        <ion-label>50 Deliveries</ion-label>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+</ng-container>
+</ng-container>

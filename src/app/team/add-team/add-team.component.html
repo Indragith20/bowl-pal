@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon name="arrow-back" slot="start" (click)="backToTeams()"></ion-icon>
+    <ion-label class="text-center content-centered">Add New Team</ion-label>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="teamForm">
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="person" item-start class="text-primary"></ion-icon>
+        Team Name
+      </ion-label>
+      <ion-input type="text" [formControlName]="'teamName'"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="mail" item-start class="text-primary"></ion-icon>
+        Email
+      </ion-label>
+      <ion-input type="email" [formControlName]="'teamEmailId'"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="call" item-start class="text-primary"></ion-icon>
+        Phone Number
+      </ion-label>
+      <ion-input type="tel" [formControlName]="'phoneNumber'"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="analytics" item-start class="text-primary"></ion-icon>
+        Representation Level
+      </ion-label>
+      <ion-select [formControlName]="'league'">
+        <ion-select-option value="league">League</ion-select-option>
+        <ion-select-option value="state">State</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form>
+
+  <div class="bottom-container">
+    <ion-button icon-start block color="success" tappable (click)="addNewTeam()">
+      <ion-icon name="person-add"></ion-icon>
+      Add Team
+    </ion-button>
+  </div>
+</ion-content>

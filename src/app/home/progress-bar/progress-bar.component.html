@@ -1,0 +1,10 @@
+<div class="progress">
+	<svg class="progress__svg" viewBox="0 0 120 120">
+		<circle class="progress__meter" cx="60" cy="60" [attr.r]="radius" stroke-width="12" />
+		<circle class="progress__value" [style.strokeDasharray]="circumference" [style.strokeDashoffset]="dashoffset" cx="60" cy="60"
+		 [attr.r]="radius" stroke-width="12" />
+		 <!-- <text x="50%" y="50%" font-size="20px" style="writing-mode: horizontal-tb; ">{{value}}</text> -->
+		 <text x="50%" y="40%" text-anchor="middle" font-size="20px" stroke="#498AE5" dy=".3em">{{value}}</text>
+		 <text x="50%" y="60%" text-anchor="middle" font-size="20px" stroke="#498AE5" dy=".3em">Balls</text>
+	</svg>
+</div>

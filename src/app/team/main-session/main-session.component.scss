@@ -1,0 +1,24 @@
+.header-style {
+    position: relative;
+}
+
+.text-style {
+    color: grey;
+    margin: 7px;
+}
+
+.box-style {
+    height: 10vh;
+    border: 1px solid lightgrey;
+}
+
+.selected-box-style {
+    height: 10vh;
+    background-color: darkseagreen;
+    border: 1px solid lightgrey;
+    color: white;
+}
+
+.ball-line-style {
+    margin: 7%;
+}

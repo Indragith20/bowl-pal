@@ -1,7 +1,10 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "myApp",
+  "appName": "bowlPal",
   "bundledWebRuntime": false,
   "npmClient": "npm",
-  "webDir": "www"
+  "webDir": "www",
+  "server": {
+    "url": "http://172.20.10.3/"
+  }
 }

@@ -1,14 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col size="8" class="ion-text-center">
+         <ion-title>Player Perfomance</ion-title>
+      </ion-col>
+      <ion-col class="align-end-style">
+          <ion-icon name="settings" (click)="goToProfile()"></ion-icon>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <app-main-home></app-main-home>
 </ion-content>

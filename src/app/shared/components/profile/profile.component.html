@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Profile</ion-title>
+    <ion-icon slot="end" name="create">Edit</ion-icon>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid class="top-profile-grid">
+    <ion-row>
+      <ion-col class="align-center-style">
+        <ion-avatar>
+          <img src="../../../assets/icon/default.png">
+        </ion-avatar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="align-center-style">
+        {{playerDetails.firstName}} {{playerDetails.lastName}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list>
+    <ion-item-group>
+      <ion-item-divider class="divider-style">
+        <ion-label>Profile</ion-label>
+      </ion-item-divider>
+
+      <ion-item>
+        <ion-label>Name</ion-label>
+        <ion-label>{{playerDetails.displayName ? playerDetails.displayName : playerDetails.firstName}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-label>{{playerDetails.emailId}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Phone Number</ion-label>
+        <ion-label>+91 {{playerDetails.phoneNumber}}</ion-label>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+      <ion-item-divider class="divider-style">
+        <ion-label>Bowling Profile</ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-label>Hand</ion-label>
+        <ion-label>{{playerDetails.hand}} Hand</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Type</ion-label>
+        <ion-label>{{playerDetails.bowlerType}}</ion-label>
+      </ion-item>
+      <ion-item *ngIf="playerDetails.spinnerType !== ''">
+        <ion-label>Spinner Type</ion-label>
+        <ion-label>{{playerDetails.spinnerType}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Competency Level</ion-label>
+        <ion-label>{{playerDetails.competencyLevel}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Representational Level</ion-label>
+        <ion-label>{{playerDetails.representationalLevel}}</ion-label>
+      </ion-item>
+    </ion-item-group>
+
+    <ion-item-group>
+      <ion-item-divider class="divider-style">
+        <ion-label>Personal Details</ion-label>
+      </ion-item-divider>
+
+      <ion-item>
+        <ion-label>Height</ion-label>
+        <ion-label>{{playerDetails.height}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Weight</ion-label>
+        <ion-label>{{playerDetails.weight}}</ion-label>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content>

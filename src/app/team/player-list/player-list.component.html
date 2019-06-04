@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon name="arrow-back" slot="start" (click)="backToTeams()"></ion-icon>
+    <ion-label class="text-center content-centered">Player List</ion-label>
+    <span slot="end" (click)="addNewPlayer()" class="content-centered margin-end-style">
+        <ion-icon slot="end" icon="add" color="primary"></ion-icon>
+        <ion-label slot="end" color="primary">Add</ion-label>
+    </span>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-searchbar placeholder="Search for Player" (ionChange)="searchPlayer($event)"></ion-searchbar>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list *ngIf="playerList.length > 0">
+    <ion-item *ngFor="let player of playerList" (click)="goToPlayerProfile(player.playerId)">
+      <ion-label>{{player.displayName ? player.displayName : player.firstName}}</ion-label>
+      <ion-icon name="arrow-dropright" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+  <div class="center" *ngIf="playerList.length === 0">
+    <div class="empty-class">
+      <ion-label>No Players Found</ion-label>
+      <ion-button>
+        <ion-icon name="create"></ion-icon>
+        Add Player
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

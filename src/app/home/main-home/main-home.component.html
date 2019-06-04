@@ -1,0 +1,57 @@
+<ion-grid no-padding>
+  <ion-row class="bar-top-style">
+    <ion-col size="4"></ion-col>
+    <ion-col size="4" (click)="goToGoalComparsionPage()">
+      <ng-container class="middle-bar-style">
+        <app-progress-bar [value]="75"></app-progress-bar>
+        <div style="width: 100%;text-align: center">Deliveries</div>
+      </ng-container>
+    </ion-col>
+    <ion-col size="4"></ion-col>
+  </ion-row>
+  <ion-row class="bar-bottom-style">
+    <ion-col size="3" *ngFor="let item of balls"  (click)="goToGoalComparsionPage()">
+      <ng-container class="middle-bar-style">
+        <app-progress-bar [value]="item.number"></app-progress-bar>
+        <div style="width: 100%;text-align: center">{{item.ball}}</div>
+      </ng-container>
+    </ion-col>
+    
+  </ion-row>
+  <ion-row class="middle-style">
+    <ion-col>
+      <div class="content-style" (click)="goToGoalSettingsPage()">
+        <ion-avatar class="avatar">
+          <img src="../../../assets/icon/star.png" />
+        </ion-avatar>
+        <ion-label class="label-style">Goal</ion-label>
+      </div>
+    </ion-col>
+    <ion-col>
+      <div class="content-style">
+        <ion-avatar class="avatar insight">
+          <img src="../../../assets/icon/insights.png" />
+        </ion-avatar>
+        <ion-label class="insight-label-style">Insights</ion-label>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="bottom-style">
+    <ion-col>
+      <div class="content-style" (click)="goToAddNotePage()">
+        <ion-avatar class="avatar bookmark">
+          <img src="../../../assets/icon/bookmark.png" />
+        </ion-avatar>
+        <ion-label class="note-label-style">Add Note</ion-label>
+      </div>
+    </ion-col>
+    <ion-col>
+      <div class="content-style" (click)="goToStartSession()">
+        <ion-avatar class="avatar new-session">
+          <img src="../../../assets/icon/play-circle.png" />
+        </ion-avatar>
+        <ion-label class="new-label-style">New Session</ion-label>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>

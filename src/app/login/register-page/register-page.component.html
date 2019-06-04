@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="login-content">
+    <div padding-horizontal text-center>
+      <div class="logo"></div>
+      <h2 ion-text class="text-primary">
+        <strong>BOWL PAL</strong>
+      </h2>
+    </div>
+    <form [formGroup]="userForm">
+      <ion-item>
+        <ion-label position="floating">
+          <ion-icon name="person" item-start class="text-primary"></ion-icon>
+          First Name
+        </ion-label>
+        <ion-input type="text" [formControlName]="'firstName'"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          <ion-icon name="person" item-start class="text-primary"></ion-icon>
+          Last Name
+        </ion-label>
+        <ion-input type="text" [formControlName]="'lastName'"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          <ion-icon name="mail" item-start class="text-primary"></ion-icon>
+          Email
+        </ion-label>
+        <ion-input type="email" [formControlName]="'emailId'"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          <ion-icon name="lock" item-start class="text-primary"></ion-icon>
+          Phone Number
+        </ion-label>
+        <ion-input type="tel" [formControlName]="'phoneNumber'"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          <ion-icon name="lock" item-start class="text-primary"></ion-icon>
+          Password
+        </ion-label>
+        <ion-input type="password" [formControlName]="'password'"></ion-input>
+      </ion-item>
+    </form>
+
+    <div class="bottom-container">
+      <ion-button icon-start block color="primary" tappable (click)="register()">
+        <ion-icon name="log-in"></ion-icon>
+        SIGN UP
+      </ion-button>
+
+      <p text-center ion-text color="secondary">Or Sign in with:</p>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <ion-button icon-only block color="fb">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col col-4>
+            <ion-button icon-only block color="twitter">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col col-4>
+            <ion-button icon-only block color="gplus">
+              <ion-icon name="logo-googleplus"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </div>
+    <div text-center margin-top>
+      <span ion-text color="primary" tappable (click)="login()">I have an account</span>
+    </div>
+
+  </div>
+</div>

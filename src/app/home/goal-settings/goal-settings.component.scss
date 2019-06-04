@@ -1,0 +1,29 @@
+.content-style {
+    margin-top: 10px;
+}
+
+.goal-container {
+    margin: 10px;
+}
+
+.divider-style {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: lightgrey;
+}
+
+.divider-style ion-button {
+    justify-content: center;
+}
+
+ion-item-divider {
+    color: black;
+    font-weight: bold;
+}
+
+.bottom-style {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

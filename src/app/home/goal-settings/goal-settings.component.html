@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Set Goal</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content style="--padding-top: 25px">
+  <ng-container>
+    <ion-segment style="--padding-top: 25px" (ionChange)="segmentChanged($event)" value="basic">
+      <ion-segment-button value="basic" mode="ios">
+        <ion-label>Basic</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="custom" mode="ios">
+        <ion-label>Custom</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ng-container>
+  <ng-container *ngIf="showBasicView">
+    <ion-list>
+      <ion-label>Level</ion-label>
+      <ion-select placeholder="Choose Your Level" (ionChange)="onSelectChange($event)">
+        <ion-select-option value="basic">Basic</ion-select-option>
+        <ion-select-option value="intermediate">Intermediate</ion-select-option>
+        <ion-select-option value="professional">Professional</ion-select-option>
+      </ion-select>
+    </ion-list>
+    <ng-container *ngIf="selectedLevel !== ''">
+      <ion-list class="goal-container">
+        <ion-item-group>
+          <ion-item-divider class="divider-style">
+            <ion-label>Your Goals</ion-label>
+          </ion-item-divider>
+
+          <ion-item *ngFor="let goal of criteria">
+            <ion-label>{{goal}}</ion-label>
+            <ion-label>{{this.selectedGoal[goal]}}</ion-label>
+          </ion-item>
+        </ion-item-group>
+      </ion-list>
+      <ion-row class="bottom-style">
+        <ion-button>Set Goal</ion-button>
+      </ion-row>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="!showBasicView">
+    <ion-list class="goal-container">
+      <ion-item-group>
+        <ion-item-divider class="divider-style">
+          <ion-label>Your Goals</ion-label>
+        </ion-item-divider>
+
+        <ion-item *ngFor="let goal of criteria">
+          <ion-label position="floating">{{goal}}</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+      </ion-item-group>
+    </ion-list>
+    <ion-row class="bottom-style">
+      <ion-button>Set Goal</ion-button>
+    </ion-row>
+  </ng-container>
+</ion-content>

@@ -1,3 +1,6 @@
 <ion-app>
+  <ng-container *ngIf="loadingStatus | async">
+    <ion-spinner></ion-spinner>
+  </ng-container>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>

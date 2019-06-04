@@ -1,0 +1,125 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon name="arrow-back" slot="start" (click)="backToPlayerList()"></ion-icon>
+    <ion-label class="text-center content-centered">Add New Player</ion-label>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="playerForm">
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="person" item-start class="text-primary"></ion-icon>
+        First Name
+      </ion-label>
+      <ion-input type="text" [formControlName]="'firstName'"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="person" item-start class="text-primary"></ion-icon>
+        Last Name
+      </ion-label>
+      <ion-input type="text" [formControlName]="'lastName'"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="mail" item-start class="text-primary"></ion-icon>
+        Email
+      </ion-label>
+      <ion-input type="email" [formControlName]="'emailId'"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="call" item-start class="text-primary"></ion-icon>
+        Phone Number
+      </ion-label>
+      <ion-input type="tel" [formControlName]="'phoneNumber'"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <ion-icon name="calendar" item-start class="text-primary"></ion-icon>
+        Dob
+      </ion-label>
+      <ion-datetime display-format="MMM DD, YYYY" [formControlName]="'dob'"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="fitness" item-start class="text-primary"></ion-icon>
+        Height
+      </ion-label>
+      <ion-input type="number" [formControlName]="'height'"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="fitness" item-start class="text-primary"></ion-icon>
+        Weight
+      </ion-label>
+      <ion-input type="number" [formControlName]="'weight'"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="hand" item-start class="text-primary"></ion-icon>
+        Hand
+      </ion-label>
+      <ion-select [formControlName]="'hand'">
+        <ion-select-option value="right">Right</ion-select-option>
+        <ion-select-option value="left">Left</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="body" item-start class="text-primary"></ion-icon>
+        Bowler Type
+      </ion-label>
+      <ion-select [formControlName]="'bowlerType'">
+        <ion-select-option value="fast">Fast</ion-select-option>
+        <ion-select-option value="medium">Medium</ion-select-option>
+        <ion-select-option value="spinner">Spinner</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="playerForm.get('bowlerType').value === 'spinner'">
+        <ion-label position="floating">
+          <ion-icon name="body" item-start class="text-primary"></ion-icon>
+          Spinner Type
+        </ion-label>
+        <ion-select [formControlName]="'spinnerType'">
+          <ion-select-option value="fast">Off Spinner</ion-select-option>
+          <ion-select-option value="medium">Leg Spinner</ion-select-option>
+          <ion-select-option value="spinner">Left Arm Spinner</ion-select-option>
+          <ion-select-option value="spinner">Chinaman</ion-select-option>
+        </ion-select>
+      </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="analytics" item-start class="text-primary"></ion-icon>
+        Representation Level
+      </ion-label>
+      <ion-select [formControlName]="'representationalLevel'">
+        <ion-select-option value="league">League</ion-select-option>
+        <ion-select-option value="state">State</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="analytics" item-start class="text-primary"></ion-icon>
+        Competency Level
+      </ion-label>
+      <ion-select [formControlName]="'competencyLevel'">
+        <ion-select-option value="beginner">Beginner</ion-select-option>
+        <ion-select-option value="intermediate">Intermediate</ion-select-option>
+        <ion-select-option value="professional">Professional</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form>
+
+  <div class="bottom-container">
+    <ion-button icon-start block color="success" tappable (click)="addNewPlayer()">
+      <ion-icon name="person-add"></ion-icon>
+      Add Player
+    </ion-button>
+  </div>
+</ion-content>

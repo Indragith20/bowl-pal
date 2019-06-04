@@ -9,3 +9,86 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+
+.align-end-style  {
+    display: flex;
+    justify-content: flex-end;
+}
+
+// http://ionicframework.com/docs/theming/
+// App Shared Imports
+// --------------------------------------------------
+$text-color: #4c6df9;
+$background-color: #fff;
+
+//  
+
+:root {
+  // fb color
+  --ion-color-fb: #3B5999;
+  --ion-color-fb-rgb: 255, 215, 0;
+  --ion-color-fb-contrast: #ffffff;
+  --ion-color-fb-contrast-rgb: 0, 0, 0;
+  --ion-color-fb-shade: #3B5999;
+  --ion-color-fb-tint: #3B5999;
+
+  //twitter color
+  --ion-color-twitter: #00ACEE;
+  --ion-color-twitter-rgb: 255, 215, 0;
+  --ion-color-twitter-contrast: #ffffff;
+  --ion-color-twitter-contrast-rgb: 0, 0, 0;
+  --ion-color-twitter-shade: #00ACEE;
+  --ion-color-twitter-tint: #00ACEE;
+
+  //gplus color
+  --ion-color-gplus: #E04006;
+  --ion-color-gplus-rgb: 255, 215, 0;
+  --ion-color-gplus-contrast: #ffffff;
+  --ion-color-gplus-contrast-rgb: 0, 0, 0;
+  --ion-color-gplus-shade: #E04006;
+  --ion-color-gplus-tint: #E04006;
+}
+.ion-color-fb {
+  --ion-color-base: var(--ion-color-fb) !important;
+  --ion-color-base-rgb: var(--ion-color-fb-rgb) !important;
+  --ion-color-contrast: var(--ion-color-fb-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-color-fb-contrast-rgb) !important;
+  --ion-color-shade: var(--ion-color-fb-shade) !important;
+  --ion-color-tint: var(--ion-color-fb-tint) !important;
+}
+
+.ion-color-twitter {
+  --ion-color-base: var(--ion-color-twitter) !important;
+  --ion-color-base-rgb: var(--ion-color-twitter-rgb) !important;
+  --ion-color-contrast: var(--ion-color-twitter-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-color-twitter-contrast-rgb) !important;
+  --ion-color-shade: var(--ion-color-twitter-shade) !important;
+  --ion-color-tint: var(--ion-color-twitter-tint) !important;
+}
+
+.ion-color-gplus {
+  --ion-color-base: var(--ion-color-gplus) !important;
+  --ion-color-base-rgb: var(--ion-color-gplus-rgb) !important;
+  --ion-color-contrast: var(--ion-color-gplus-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-color-gplus-contrast-rgb) !important;
+  --ion-color-shade: var(--ion-color-gplus-shade) !important;
+  --ion-color-tint: var(--ion-color-gplus-tint) !important;
+}
+
+.content-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.margin-end-style {
+  margin-right: 5px;
+}
+
+.bottom-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}

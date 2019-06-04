@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col>
+            <ion-title class="ion-text-center">Pitch Map</ion-title>
+        </ion-col>
+        <ion-col class="align-end-style">
+            <ion-icon name="more" (click)="presentActionSheet()"></ion-icon>
+        </ion-col>
+      </ion-row>
+  </ion-toolbar>
+</ion-header>
+<div class="container-canvas">
+  <canvas id="canvas" #canvas style="cursor:pointer;border: 1px solid lightgray" 
+    (click)="onCanvasClick($event)"></canvas>
+</div>

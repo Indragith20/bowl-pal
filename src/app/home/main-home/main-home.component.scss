@@ -1,0 +1,115 @@
+canvas {
+    width: 100%;
+}
+
+.top-style {
+    height: 40vh;
+}
+
+.bar-top-style {
+    height: 25vh;
+    width: 100%;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.bar-bottom-style {
+    height: 25vh;
+    width: 100%;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.middle-style {
+    height: 20vh;
+}
+
+.middle-bar-style {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.top-bar-avatar {
+    background-color: #E8F2FD;
+    display:block;
+    width:30%;
+    height: 30%;
+    border-radius: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottom-style {
+    height: 20vh;
+}
+
+.content-style {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid grey;
+    margin: auto;
+    text-align: center;
+}
+
+.avatar {
+    background-color: #E8F2FD;
+    display:block;
+    width:50%;
+    height: 50%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ion-avatar img {
+    display:inline-block;
+    width: 50%;
+    height: auto;
+}
+.label-style {
+    font-weight: bold;
+    color: #85A5CD;
+    padding: 5px;
+}
+
+.bookmark {
+    background-color: #FFF8DA;
+}
+
+.note-label-style {
+    font-weight: bold;
+    padding: 5px;
+    color: #F8F09E;
+}
+
+.new-session {
+    background-color: white;
+    border-color: 1px solid #E4F9F0;
+}
+
+.new-label-style {
+    font-weight: bold;
+    padding: 5px;
+    color: #BAEB6C;
+}
+
+.insight {
+    background-color: #FFD7DD;
+}
+
+.insight-label-style {
+    font-weight: bold;
+    padding: 5px;
+    color: #FFD7DD;
+}

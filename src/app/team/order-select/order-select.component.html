@@ -1,0 +1,35 @@
+<div class="header-style">
+  <ion-list>
+    <ion-item>
+      <ion-label style="font-weight: bold">Choose Team</ion-label>
+      <ion-select placeholder="Select One" (ionChange)="getPlayerList($event)">
+        <ion-select-option *ngFor="let team of teams" value="{{team.teamId}}">{{team.teamName}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ng-container *ngIf="originalPlayerList.length > 0">
+    <ion-text class="content-centered text-style">Tap to select/deselect the player</ion-text>
+    <ion-searchbar placeholder="Search for Player" (ionChange)="searchPlayer($event)"></ion-searchbar>
+  </ng-container>
+</div>
+<ion-content>
+  <div class="player-container" *ngIf="originalPlayerList.length > 0">
+    <ng-container>
+      <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+        <ion-item *ngFor="let player of playerList; let i = index" (click)="togglePlayer(player, i)">
+          <ion-reorder slot="start"></ion-reorder>
+          <ion-label>{{player.firstName}} {{player.lastName}}</ion-label>
+          <ion-icon slot="end" color="{{player.selected ? 'success' : 'danger'}}" class="margin-end-style"
+            name="{{player.selected ? 'checkmark' : 'add'}}"></ion-icon>
+        </ion-item>
+      </ion-reorder-group>
+    </ng-container>
+    
+  </div>
+</ion-content>
+<ion-footer *ngIf="originalPlayerList.length > 0">
+  <ion-text class="content-centered text-style">Hold the Right bar to reorder</ion-text>
+  <div class="bottom-container">
+    <ion-button (click)="startSession()" full>Start Session</ion-button>
+  </div>
+</ion-footer>

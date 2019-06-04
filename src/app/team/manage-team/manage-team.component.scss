@@ -1,0 +1,18 @@
+.card-style {
+    width: 100%;
+    background-color: #DBEBFF;
+}
+
+.card-content-empty {
+    display: flex;
+    margin: 10px;
+    flex-direction: column;
+}
+
+.action-style {
+    display: flex;
+    border-top: 1px solid lightgrey;
+    margin-top: 3px;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}

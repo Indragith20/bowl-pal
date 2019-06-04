@@ -1,0 +1,49 @@
+<div class="header-style">
+  <ion-list>
+    <ion-item>
+      <ion-label style="font-weight: bold">Selected Player</ion-label>
+      <ion-select placeholder="Select One" [ngModel]="selectedPlayer" 
+          (ionChange)="changePlayer($event)">
+        <ion-select-option *ngFor="let player of playersList" value="{{player.playerId}}">{{player.firstName}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label style="font-weight: bold">Batsmen Type</ion-label>
+      <ion-select placeholder="Select One" [ngModel]="selectedBatsmenType" (ionChange)="changeType($event)">
+        <ion-select-option *ngFor="let type of batsmenType" value="{{type}}">{{type}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</div>
+<ion-content>
+  <ion-grid>
+    <ion-row class="content-centered text-style">
+      <ion-text>Choose Ball Length</ion-text>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngFor="let ball of ballLengthsWithSelection" 
+        class="content-centered" [ngClass]="{'box-style': !ball.selected, 'selected-box-style': ball.selected}"
+        size="6" (click)="selectBallType(ball)">
+        {{ball.ballType}}
+      </ion-col>
+    </ion-row>
+    <ng-container *ngIf="!isGoodLength">
+      <ion-row class="content-centered text-style ball-line-style">
+        <ion-text>Choose Ball Line</ion-text>
+      </ion-row>
+      <ion-row>
+        <ion-col *ngFor="let ball of ballLineWithSelection" 
+          class="content-centered" [ngClass]="{'box-style': !ball.selected, 'selected-box-style': ball.selected}"
+          size="4" (click)="changeBallLine(ball)">
+          {{ball.ballLine}}
+        </ion-col>
+      </ion-row>
+    </ng-container>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <div class="bottom-container">
+    <ion-button (click)="recordAction()" color="warning" [disabled]="disableButton">Record Action</ion-button>
+  </div>
+</ion-footer>

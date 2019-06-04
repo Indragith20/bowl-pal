@@ -1,0 +1,31 @@
+.progress {
+    position: relative;
+}
+  
+  .progress__value-text {
+    /* position: absolute;
+    top: 48px;
+    left: 45px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+  }
+  
+  .progress__svg {
+    //transform: rotate(-90deg);
+  }
+  
+  .progress__meter,
+  .progress__value {
+    fill: none;
+  }
+  
+  .progress__meter {
+    stroke: #ccc;
+  }
+  
+  .progress__value {
+    stroke: #498AE5;
+    transition: all 100ms;
+  }
