@@ -14,17 +14,16 @@ import { LoadingController } from '@ionic/angular';
   templateUrl: './add-player.component.html',
   styleUrls: ['./add-player.component.scss'],
 })
-@Loader({ loadingProperty: 'loader'})
 @AutoUnsubscribe()
 export class AddPlayerComponent implements OnInit, OnDestroy {
   userData: ICoachDetails;
   playerForm: FormGroup;
   selectedTeamId: string;
   teamSubscription: Subscription;
-  loader: any;
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder,
-     private teamService: TeamService, private router: Router, private toast: ToasterService, private loadingController: LoadingController) { }
+              private teamService: TeamService, private router: Router, private toast: ToasterService,
+              private loadingController: LoadingController) { }
 
   ngOnInit() {
     const teamDetails: IManageTeamDetails = this.route.snapshot.parent.data.teams;
@@ -57,9 +56,10 @@ export class AddPlayerComponent implements OnInit, OnDestroy {
     });
   }
 
-  addNewPlayer() {
+  async addNewPlayer() {
     console.log(this.playerForm.value);
-    this.loader.present();
+    const loader = await this.loadingController.create({ message: 'Adding Player' });
+    loader.present();
     this.teamService.addPlayer(this.playerForm.value).then((data) => {
       console.log(data);
       if(data && data.path) {
@@ -72,7 +72,7 @@ export class AddPlayerComponent implements OnInit, OnDestroy {
       console.log(err);
       this.toast.presentToast('Something Bad Happened');
     }).finally(() => {
-      this.loader.dismiss();
+      loader.dismiss();
     });
   }
 

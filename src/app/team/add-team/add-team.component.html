@@ -1,7 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-icon name="arrow-back" slot="start" (click)="backToTeams()"></ion-icon>
-    <ion-label class="text-center content-centered">Add New Team</ion-label>
+    <ion-buttons slot="start">
+        <ion-back-button defaultHref="home" (click)="backToTeams()"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Add Team</ion-title>
+    <ion-button slot="end" style="visibility: hidden"></ion-button>
   </ion-toolbar>
 </ion-header>
 <ion-content padding>

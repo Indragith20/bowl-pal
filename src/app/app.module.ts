@@ -18,6 +18,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AppService } from './shared/services/app.service';
 import { LoaderService } from './shared/services/loader.service';
 import { ToasterService } from './shared/services/toaster.service';
+import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -40,7 +41,8 @@ import { ToasterService } from './shared/services/toaster.service';
     LoginService,
     LoaderService,
     AngularFireAuth,
-    ToasterService
+    ToasterService,
+    NativePageTransitions
   ],
   bootstrap: [AppComponent]
 })

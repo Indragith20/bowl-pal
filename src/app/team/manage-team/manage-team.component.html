@@ -1,43 +1,52 @@
 <ion-header>
   <ion-toolbar>
-    <ion-label>Manage Team</ion-label>
-    <span slot="end" (click)="addTeam()">
-      <ion-icon slot="end" icon="add" color="primary"></ion-icon>
-      <ion-label slot="end" color="primary">New Team</ion-label>
-    </span>
+    <ion-title>Manage Team</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addNewPlayer()">
+        <ion-icon icon="add" color="primary"></ion-icon>
+        New Team
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
+<ion-searchbar placeholder="Enter Team Name" (ionChange)="searchTeam($event)"></ion-searchbar>
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ng-container *ngIf="teamDetails && teamDetails.length > 0">
-    <ion-card *ngFor="let team of teamDetails">
-      <ion-card-header>{{team.teamName}}</ion-card-header>
-      <ion-card-content>
+    <ion-virtual-scroll [items]="teamDetails">
+      <ion-card *virtualItem="let team">
+        <ion-card-header>{{team.teamName}}</ion-card-header>
+        <ion-card-content>
           <ion-item>
             <ion-icon name="people" slot="start"></ion-icon>
             <ion-label>No.of Player: {{team.players && team.players.length}}</ion-label>
           </ion-item>
           <ion-item>
-              <ion-icon name="mail" slot="start"></ion-icon>
-              <ion-label>Email: {{team.teamEmailId}}</ion-label>
+            <ion-icon name="mail" slot="start"></ion-icon>
+            <ion-label>Email: {{team.teamEmailId}}</ion-label>
           </ion-item>
           <ion-item>
-              <ion-icon name="person" slot="start"></ion-icon>
-              <ion-label>Coach: {{userData.displayName}}</ion-label>
+            <ion-icon name="person" slot="start"></ion-icon>
+            <ion-label>Coach: {{userData.displayName}}</ion-label>
           </ion-item>
           <div class="action-style">
             <ion-button color="light" tappable (click)="viewPlayerList(team.teamId)">
-                <ion-icon name="eye"></ion-icon>
-                View
+              <ion-icon name="eye"></ion-icon>
+              View
             </ion-button>
             <ion-button color="primary" tappable (click)="login()">
-                <ion-icon name="create"></ion-icon>
-                Edit
+              <ion-icon name="create"></ion-icon>
+              Edit
             </ion-button>
           </div>
-      </ion-card-content>
-    </ion-card>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-virtual-scroll>
   </ng-container>
-  <div class="content-centered" *ngIf="teamDetails && teamDetails.length === 0" >
+  <div class="content-centered" *ngIf="teamDetails && teamDetails.length === 0">
     <ion-card class="card-style" tappable>
       <ion-card-content>
         <div text-center margin-top class="card-content-empty">

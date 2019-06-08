@@ -3,15 +3,14 @@ import { IPlayer } from 'src/app/shared/interfaces/player.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeamService } from '../services/team.service';
 import { ISessionAction } from 'src/app/shared/interfaces/session.interface';
-import { Loader } from 'src/app/shared/utils/loader';
 import { LoadingController } from '@ionic/angular';
+import { ToasterService } from 'src/app/shared/services/toaster.service';
 
 @Component({
   selector: 'app-main-session',
   templateUrl: './main-session.component.html',
   styleUrls: ['./main-session.component.scss'],
 })
-@Loader({ loadingProperty: 'loader'})
 export class MainSessionComponent implements OnInit {
   sessionId: string;
   playersList: IPlayer[];
@@ -27,8 +26,9 @@ export class MainSessionComponent implements OnInit {
   selectedBallLength: string;
   disableButton: boolean = true;
   startIndex: number = 0;
-  loader: any;
-  constructor(private route: ActivatedRoute, private router: Router, private teamService: TeamService, private loadingController: LoadingController) { }
+  constructor(private route: ActivatedRoute, private router: Router,
+              private teamService: TeamService, private loadingController: LoadingController,
+              private toaster: ToasterService) { }
 
   ngOnInit() {
     const routeData = this.route.snapshot.data.sessionDetails;
@@ -99,8 +99,9 @@ export class MainSessionComponent implements OnInit {
     }
   }
 
-  recordAction() {
-    this.loader.present();
+  async recordAction() {
+    const loader = await this.loadingController.create({ message: 'Recording Action'});
+    loader.present();
     const action: ISessionAction = {
       actionType: this.selectedBallLength,
       batsmenType: this.selectedBatsmenType ? this.selectedBatsmenType : '',
@@ -110,11 +111,15 @@ export class MainSessionComponent implements OnInit {
     const modifiedAction = this.isGoodLength ? action : { ...action, ballLine: this.selectedBallLine };
     this.teamService.addActionToSession(this.sessionId, modifiedAction).then((data) => {
       console.log(data);
+      if(data) {
+        this.toaster.presentToast('Action Recorded');
+      }
       this.movePlayer();
     }).catch((err) => {
       console.log(err);
+      this.toaster.presentToast('Something Bad Happended.. Try Again');
     }).finally(() => {
-      this.loader.dismiss();
+      loader.dismiss();
     });
   }
 

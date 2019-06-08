@@ -18,7 +18,7 @@ import { Loader } from './shared/utils/loader';
 export class AppComponent implements OnDestroy {
   routeSubscription: Subscription;
   loadingStatus = new Observable<boolean>();
-  loadingData: any;
+  loadingData: HTMLIonLoadingElement;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -44,8 +44,10 @@ export class AppComponent implements OnDestroy {
   intializeLoadingStatus() {
     this.loadingStatus = this.appService.loading;
     this.appService.loading.subscribe((data) => {
-      if(data === true) {
-        this.loadingData && this.loadingData.present();
+      if (data === true) {
+        if (this.loadingData) {
+          this.loadingData.present();
+        }
       } else {
         this.loadingData && this.loadingData.dismiss();
       }

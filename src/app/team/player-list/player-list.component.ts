@@ -19,7 +19,9 @@ export class PlayerListComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private router: Router, private teamService: TeamService) {
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewWillEnter() {
     this.playerList = this.route.snapshot.data.playerList;
     this.originalPlayerList = [...this.playerList];
     this.teamSubscription = this.route.params.subscribe((params) => {

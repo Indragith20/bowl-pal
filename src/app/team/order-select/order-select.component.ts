@@ -5,7 +5,6 @@ import { TeamService } from '../services/team.service';
 import { IPlayer, IPlayerSelection } from 'src/app/shared/interfaces/player.interface';
 import { ICoachDetails } from 'src/app/shared/interfaces/coach.interface';
 import { ISession } from 'src/app/shared/interfaces/session.interface';
-import { Loader } from 'src/app/shared/utils/loader';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
@@ -13,7 +12,6 @@ import { LoadingController } from '@ionic/angular';
   templateUrl: './order-select.component.html',
   styleUrls: ['./order-select.component.scss'],
 })
-@Loader({ loadingProperty: 'loader' })
 export class OrderSelectComponent implements OnInit {
   userDetails: ICoachDetails;
   teams: ITeam[];
@@ -23,7 +21,8 @@ export class OrderSelectComponent implements OnInit {
   selectedTeamId: string;
   lastSelectedIndex: number = 0;
   loader: any;
-  constructor(private route: ActivatedRoute, private teamService: TeamService, private router: Router, private loadingController: LoadingController) { }
+  constructor(private route: ActivatedRoute, private teamService: TeamService,
+              private router: Router, private loadingController: LoadingController) { }
 
   ngOnInit() {
     console.log(this.route.snapshot.parent.data.teams);
@@ -32,8 +31,8 @@ export class OrderSelectComponent implements OnInit {
     this.teams = parentData.teamDetails;
   }
 
-  getPlayerList(event) {
-    this.loader.present();
+  async getPlayerList(event) {
+    const loader = await this.loadingController.create({ message: 'Getting Players'});
     this.selectedTeamId = event.target.value;
     this.teamService.getPlayers(this.selectedTeamId).then((data) => {
       console.log(data);
@@ -45,7 +44,7 @@ export class OrderSelectComponent implements OnInit {
     }).catch((err) => {
       console.log(err);
     }).finally(() => {
-      this.loader.dismiss();
+      loader.dismiss();
     });
   }
 
@@ -80,7 +79,8 @@ export class OrderSelectComponent implements OnInit {
     this.playerList.splice(ev.detail.to, 0, this.playerList.splice(ev.detail.from, 1)[0]);
   }
 
-  startSession() {
+  async startSession() {
+    const loader = await this.loadingController.create({ message: 'Intiating Session'});
     const intialSession: ISession = {
       playerIds: [...this.selectedPlayerList.map(selectedPlayer => selectedPlayer.playerId)],
       recordedBy: this.userDetails.coachId,
@@ -92,7 +92,7 @@ export class OrderSelectComponent implements OnInit {
       const { selected, ...playerWithoutSelection} = player;
       return playerWithoutSelection;
     });
-    this.loader.present();
+    loader.present();
     this.teamService.addSessionData(intialSession, selectedPlayerListWithoutSelection).then((data) => {
       if(data) {
         this.router.navigate(['../main-session/' + data.sessionId], { relativeTo: this.route });
@@ -100,8 +100,8 @@ export class OrderSelectComponent implements OnInit {
     }).catch((err) => {
       console.log(err);
     }).finally(() => {
-      this.loader.dismiss();
-    })
+      loader.dismiss();
+    });
   }
 
 }

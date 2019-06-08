@@ -1,28 +1,35 @@
 <ion-header>
   <ion-toolbar>
-    <ion-icon name="arrow-back" slot="start" (click)="backToTeams()"></ion-icon>
-    <ion-label class="text-center content-centered">Player List</ion-label>
-    <span slot="end" (click)="addNewPlayer()" class="content-centered margin-end-style">
-        <ion-icon slot="end" icon="add" color="primary"></ion-icon>
-        <ion-label slot="end" color="primary">Add</ion-label>
-    </span>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" (click)="backToTeams()"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Player List</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addNewPlayer()">
+        <ion-icon icon="add" color="primary"></ion-icon>
+        Add
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
+<ion-searchbar *ngIf="playerList && playerList.length > 0" placeholder="Search for Player" 
+  (ionChange)="searchPlayer($event)"></ion-searchbar>
 <ion-content>
-  <ion-searchbar placeholder="Search for Player" (ionChange)="searchPlayer($event)"></ion-searchbar>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-list *ngIf="playerList.length > 0">
-    <ion-item *ngFor="let player of playerList" (click)="goToPlayerProfile(player.playerId)">
-      <ion-label>{{player.displayName ? player.displayName : player.firstName}}</ion-label>
-      <ion-icon name="arrow-dropright" slot="end"></ion-icon>
-    </ion-item>
-  </ion-list>
-  <div class="center" *ngIf="playerList.length === 0">
+  <ng-container *ngIf="playerList && playerList.length > 0">
+    <ion-virtual-scroll [items]="playerList">
+      <ion-item *virtualItem="let player" (click)="goToPlayerProfile(player.playerId)">
+        <ion-label>{{player.displayName ? player.displayName : player.firstName}}</ion-label>
+        <ion-icon name="arrow-dropright" slot="end"></ion-icon>
+      </ion-item>
+    </ion-virtual-scroll>
+  </ng-container>
+  <div class="center" *ngIf="playerList && playerList.length === 0">
     <div class="empty-class">
       <ion-label>No Players Found</ion-label>
-      <ion-button>
+      <ion-button (click)="addNewPlayer()">
         <ion-icon name="create"></ion-icon>
         Add Player
       </ion-button>
