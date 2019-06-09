@@ -20,23 +20,43 @@ export class ManageTeamComponent implements OnInit, OnDestroy {
   userData: ICoachDetails;
   fullTeamDetails: ITeam[] = [];
   teamDetails: ITeam[] = [];
-  showFabButton: boolean;
 
   constructor(private route: ActivatedRoute, private teamService: TeamService,
-    private router: Router, private loadingController: LoadingController, private nativePageTransitions: NativePageTransitions) { }
+    private router: Router, private loadingController: LoadingController,
+    private nativePageTransitions: NativePageTransitions) { }
 
   ngOnInit() {
-    this.showFabButton = false;
+  }
+
+  ionViewWillEnter() {
+    // TODO:  Try Modifying the Resolver to avoid the below check
+    /** Check needs to be done whether new team has been added to load the new teams */
     console.log(this.route.snapshot.parent.data);
     const fullTeamDetails: IManageTeamDetails = this.route.snapshot.parent.data.teams;
     this.userData = fullTeamDetails.userDetails;
-    this.fullTeamDetails = fullTeamDetails.teamDetails;
-    this.teamDetails = [...this.fullTeamDetails];
+    if(this.teamService.isNewTeamAdded) {
+      this.loadingController.create({ message: 'Getting Teams'}).then((loader) => {
+        loader.present();
+        this.teamService.getTeams(this.userData.coachId).then((data) => {
+          this.fullTeamDetails = [...data];
+          this.teamDetails = [...data];
+          this.teamService.isNewTeamAdded = false;
+        }).catch((err) => {
+            console.log(err);
+        }).finally(() => {
+            loader.dismiss();
+        });
+      });
+    } else {
+      this.fullTeamDetails = fullTeamDetails.teamDetails;
+      this.teamDetails = [...this.fullTeamDetails];
+    }
   }
 
   doRefresh(event) {
     this.teamService.getTeams(this.userData.coachId).then((data) => {
       this.fullTeamDetails = [...data];
+      this.teamDetails = [...data];
       event.target.complete();
     }).catch((err) => {
         event.target.complete();
@@ -48,7 +68,6 @@ export class ManageTeamComponent implements OnInit, OnDestroy {
   }
 
   addTeam() {
-    this.showFabButton = true;
     this.router.navigate(['../add-team/'], { relativeTo: this.route });
   }
 

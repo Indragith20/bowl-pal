@@ -14,12 +14,13 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class TeamService {
     selectedPlayersList: IPlayer[];
-    loader: any;
+    isNewTeamAdded: boolean = false;
     constructor(private af: AngularFirestore) { }
 
     async createTeam(teamDetails: ITeam): Promise<any> {
         const teamId = uuid();
         const modifiedTeam = { ...teamDetails, teamId };
+        this.isNewTeamAdded = true;
         return await this.af.collection('teams').add(modifiedTeam);
     }
 
@@ -45,10 +46,18 @@ export class TeamService {
             const playerId = uuid();
             const modifiedPlayer = { ...playerDetails, playerId };
             this.af.collection('users').add(modifiedPlayer).then((data) => {
-                resolve(data);
+                const doc = firebase.firestore().collection('teams').where('teamId', '==', playerDetails.teamId).get();
+                doc.then((snapshot) => {
+                    snapshot.forEach((document) => {
+                        document.ref.set({
+                            playerIds: firebase.firestore.FieldValue.arrayUnion(playerId)
+                        }, { merge: true });
+                    });
+                    resolve(data);
+                });
             }).catch((err) => {
                 reject(err);
-            })
+            });
         });
     }
 

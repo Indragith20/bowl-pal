@@ -1,7 +1,7 @@
 export interface ITeam {
     coachId?: string;
     phoneNumber?: string;
-    players?: string[];
+    playerIds?: string[];
     teamEmailId: string;
     teamId: string;
     teamName: string;
